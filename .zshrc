@@ -2,7 +2,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/artsiom_barkouski/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -99,8 +98,3 @@ unsetopt hist_ignore_space      # ignore space prefixed commands
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.bashrc
-export NVM_DIR="/Users/artsiom_barkouski/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export SSL_CERT_FILE=/usr/local/etc/openssl/certs/rootca.cer
