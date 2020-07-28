@@ -2,17 +2,25 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+export ZSH="/Users/artsiom/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -40,37 +48,30 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(
+  git
+  mvn
+  kubectl
+  helm
+)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-#
-###
-## History
-###
-#HISTFILE=~/.zsh_history         # where to store zsh config
-HISTSIZE=1000000                   # big history
-SAVEHIST=1000000                   # big history
-#setopt append_history           # append
-setopt hist_ignore_all_dups     # no duplicate
-unsetopt hist_ignore_space      # ignore space prefixed commands
-#setopt hist_reduce_blanks       # trim blanks
-#setopt hist_verify              # show before executing history commands
-#setopt inc_append_history       # add commands as they are typed, don't wait until shell exit 
-#setopt share_history            # share hist between sessions
-#setopt bang_hist                # !keyword
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -98,3 +99,44 @@ unsetopt hist_ignore_space      # ignore space prefixed commands
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+#export JAVA_9_HOME=$(/usr/libexec/java_home -v9)
+#export JAVA_10_HOME=$(/usr/libexec/java_home -v10)
+export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+#export JAVA_12_HOME=$(/usr/libexec/java_home -v12)
+
+alias java8='export JAVA_HOME=$JAVA_8_HOME'
+#alias java9='export JAVA_HOME=$JAVA_9_HOME'
+#alias java10='export JAVA_HOME=$JAVA_10_HOME'
+alias java11='export JAVA_HOME=$JAVA_11_HOME'
+#alias java12='export JAVA_HOME=$JAVA_12_HOME'
+
+# default to Java 11
+java8
+
+export PATH=$PATH:~/IdeaProjects/mw_tools/__scripts
+export PATH=$PATH:~/IdeaProjects/sha_api/bin
+export PATH=$PATH:~/Downloads/apache-maven-3.6.3/bin
+export PATH=$PATH:~/Downloads/mongodb-macos-x86_64-4.2.1/bin
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+export SONAR_TOKEN=ee7d81e1917452ab5405a4385ed69a3a72f1b0f1
+
+#mongo
+export PATH=$PATH:~/Downloads/mongodb-macos-x86_64-enterprise-4.2.5/bin
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+alias pall='find ~/IdeaProjects -name ".git" -print0 |sed 's/.git//g' |xargs -0 -P 8 -I{} -t git -C {}  pull --rebase'
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+alias fall='find ~/IdeaProjects -name ".git" -print0 |sed s/.git//g |xargs -0 -P 8 -I{} -t git -C {} fetch --all'
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
